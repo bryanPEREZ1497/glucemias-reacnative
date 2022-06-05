@@ -5,6 +5,8 @@ import { PaperContext } from '../context/PaperContext';
 import { PapersContext } from '../context/PapersContext';
 import { inicialState } from '../interfaces/appInterfaces';
 import getUser from "../helpers/getUserFromStorage";
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 const CalendarComponent = () => {
     const {
@@ -43,7 +45,10 @@ const CalendarComponent = () => {
         <SafeAreaView style={styles.safe}>
             <Calendar
                 onDayPress={(day) => searchPaperByDay(day.dateString)}
-                renderArrow={(direction) => (<Text>{direction}</Text>)}
+                renderArrow={(direction) => (direction==='left'
+                ?<Icon name={'remove'} size={15}></Icon>
+                :<Icon name={'add'} size={15}></Icon>)}
+
                 enableSwipeMonths={true}
                 markingType={'custom'}
                 markedDates={markedDay}

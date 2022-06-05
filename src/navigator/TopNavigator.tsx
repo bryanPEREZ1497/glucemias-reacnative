@@ -10,7 +10,8 @@ import { Button, Text, useWindowDimensions } from 'react-native';
 import { DrawerScreenProps } from '@react-navigation/drawer';
 import { StackScreenProps } from '@react-navigation/stack';
 import CalendarComponent from '../components/CalendarComponent';
-// import Icon from 'react-native-vector-icons/Ionicons';
+// import { Icon } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Ionicons';
 // import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 interface Props extends DrawerScreenProps<any, any> { }
 
@@ -33,15 +34,21 @@ export const TopNavigator = ({ navigation }: Props) => {
   }, [])
 
 
+
   return (
     <Tab.Navigator
+      // style={{
+      //   display: 'flex',
+      //   alignContent: 'center',
+      //   flexWrap: 'wrap'
+      // }}
 
       screenOptions={({ route }) => ({
-        tabBarLabelStyle: { fontSize: width >= 640 ? 12 : 0,  },
-        tabBarPressColor:   '#6F68A6',
+        tabBarLabelStyle: { fontSize: width >= 640 ? 12 : 0, },
+        tabBarPressColor: '#6F68A6',
         tabBarShowIcon: true,
         tabBarIndicatorStyle: {
-          backgroundColor:  '#6F68A6',
+          backgroundColor: '#6F68A6',
         },
         tabBarStyle: {
           //en ios es shadowColor:"transparent"
@@ -51,31 +58,30 @@ export const TopNavigator = ({ navigation }: Props) => {
           let iconName: string = '';
           switch (route.name) {
             case 'Ayunas':
-              iconName = "wb-sunny";
+              iconName = "sunny";
               break;
 
             case 'Media Mañana':
-              iconName = "breakfast-dining";
+              iconName = "cafe";
               break;
 
             case 'Almuerzo':
               iconName = "restaurant";
               break;
             case 'Media Tarde':
-              iconName = "local-cafe";
+              iconName = "partly-sunny";
               break;
             case 'Cena':
-              iconName = "dinner-dining";
+              iconName = "moon";
               break;
             case 'Dormir':
-              iconName = "hotel";
+              iconName = "bed";
               break;
             case 'Calendario':
-              iconName = "hotel";
+              iconName = "calendar";
               break;
           }
-          return <Text>xd</Text>
-          // return <Icon style={{ color }} name={iconName} size={25}></Icon>;
+          return <Icon style={{ color }} name={iconName} size={25}></Icon>;
         },
       })}
 
@@ -83,14 +89,16 @@ export const TopNavigator = ({ navigation }: Props) => {
 
       sceneContainerStyle={{
         backgroundColor: 'white',
+        display: 'flex',
+          alignContent: 'center',
+          flexWrap: 'wrap'
+      }}
 
-      }} 
-      
-    
-  
-      
+
+
+
     >
-    < Tab.Screen name = "Ayunas" component = { FormScreen } />
+      < Tab.Screen name="Ayunas" component={FormScreen} />
       <Tab.Screen name="Media Mañana" component={PaperScreen1} />
       <Tab.Screen name="Almuerzo" component={PapersScreen2} />
       <Tab.Screen name="Media Tarde" component={PapersScreen3} />

@@ -8,9 +8,7 @@ import { loginStyles } from '../styles/LoginTheme';
 // import Icon from 'react-native-vector-icons/Ionicons';
 import { TopNavigator } from './TopNavigator';
 import { AuthContext } from '../context/AuthContext';
-import AgendaComponent from '../components/AgendaComponent';
 import CalendarComponent from '../components/CalendarComponent';
-import TabBar from '../components/TabBar';
 
 const Drawer = createDrawerNavigator();
 
@@ -21,7 +19,7 @@ export const MenuLateralBasico = () => {
     <Drawer.Navigator
 
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
         drawerStyle:{backgroundColor:'#66609F'},
         headerStyle: {
           elevation: 0,

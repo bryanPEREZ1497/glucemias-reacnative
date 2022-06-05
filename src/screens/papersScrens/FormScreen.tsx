@@ -5,6 +5,8 @@ import { AuthContext } from '../../context/AuthContext';
 import { PaperContext } from '../../context/PaperContext';
 // import TextInput from 'react-native-text-input-interactive';
 import { useFecha } from '../../hooks/useFecha';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 // import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 interface Props extends DrawerScreenProps<any, any> { }
@@ -45,62 +47,69 @@ const FormScreen = () => {
         <>
             <ScrollView style={{ flex: 1 }}>
 
+                <View style={{ marginTop: 20, position: 'relative' }}>
+                    <Icon style={{ position: 'absolute' }} name={'calendar'} size={20}></Icon>
+                    <Text style={{ fontSize: 15, marginLeft: 26 }}>{paper.dia}</Text>
+                </View>
                 <View style={styles.formContainer}>
-                    <View style={{ right: 40, bottom: 16 }}>
-                        <Text style={{ fontSize: 15 }}>      {paper.dia}</Text>
-                    </View>
-                    <View style={{ right: 160, bottom: 37 }}>
-                        {/* <MaterialIcons name='today' size={23} color='#6F68A6' /> */}
-                    </View>
 
                     <Text style={styles.titleForm}>Glucemia en Ayunas</Text>
-                    <View style={styles.input}>
-                        <Text>ayunas</Text>
-                        <TextInput 
-                        editable={!isDisabled}  
-                        selectTextOnFocus={!isDisabled} 
-                        placeholder='Nivel de Glucosa' 
-                        value={paper.ayunas} 
-                        keyboardType='number-pad' 
-                        onChangeText={(value) => handleChange(value, "ayunas")} />
+                    <View style={styles.formItem}>
+                        <Text>Ayunas</Text>
+                        <TextInput
+                            editable={!isDisabled}
+                            selectTextOnFocus={!isDisabled}
+                            placeholder='Nivel de Glucosa'
+                            value={paper.ayunas}
+                            keyboardType='number-pad'
+                            style={styles.input}
+                            onChangeText={(value) => handleChange(value, "ayunas")} />
                     </View>
 
-                    <View style={styles.input}>
-                        <Text>rapida_ultra_rap</Text>
-                        <TextInput 
-                        editable={!isDisabled}  
-                        selectTextOnFocus={!isDisabled} 
-                        placeholder='Insulina Rápida' 
-                        value={paper.rapida_ultra_rap} 
-                        keyboardType='number-pad' 
-                        onChangeText={(value) => handleChange(value, "rapida_ultra_rap")} />
+                    <View style={styles.formItem}>
+                        <Text>Rápida/Ultra rápida</Text>
+                        <TextInput
+                            editable={!isDisabled}
+                            selectTextOnFocus={!isDisabled}
+                            placeholder='Insulina Rápida'
+                            value={paper.rapida_ultra_rap}
+                            keyboardType='number-pad'
+                            style={styles.input}
+                            onChangeText={(value) => handleChange(value, "rapida_ultra_rap")} />
                     </View>
 
-                    <View style={styles.input}>
-                        <Text>nph_lantus</Text>
-                        <TextInput 
-                        editable={!isDisabled}  
-                        selectTextOnFocus={!isDisabled} 
-                        placeholder='NPH / Insulina Lenta' 
-                        value={paper.nph_lantus} 
-                        keyboardType='number-pad' 
-                        onChangeText={(val) => handleChange(val, "nph_lantus")} />
+                    <View style={styles.formItem}>
+                        <Text>Lenta</Text>
+                        <TextInput
+                            editable={!isDisabled}
+                            selectTextOnFocus={!isDisabled}
+                            placeholder='NPH / Insulina Lenta'
+                            value={paper.nph_lantus}
+                            keyboardType='number-pad'
+                            style={styles.input}
+                            onChangeText={(val) => handleChange(val, "nph_lantus")} />
                     </View>
 
-        
-                    <View style={{flex:1,flexDirection:'row'}}>
-                        <Text style={{paddingHorizontal:'5px'}}>Corrección</Text> 
-                        <Text style={{paddingHorizontal:'5px'}}>{correccion}</Text>                       
-                        <Button   disabled={isDisabled}
+
+                    <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                        <Text style={{ paddingHorizontal: '5px' }}>Corrección</Text>
+                        <Text style={{ paddingHorizontal: '5px', marginEnd: '5px' }}>{correccion}</Text>
+                        {/* <Button disabled={isDisabled}
                             onPress={() => handlePress(1)}
                             title="+"
                             color="#841584"
                         />
-                        <Button   disabled={isDisabled}
+                        <Button disabled={isDisabled}
                             onPress={() => handlePress(-1)}
                             title="-"
                             color="#841584"
-                        />
+                        /> */}
+                        <Pressable style={styles.button} onPress={() => handlePress(+1)}>
+                            <Text style={{color:'white',fontSize:14}}>+</Text>
+                        </Pressable>
+                        <Pressable style={styles.button} onPress={() => handlePress(-1)}>
+                            <Text style={{color:'white',fontSize:14}}>-</Text>
+                        </Pressable>
                     </View>
                 </View>
             </ScrollView>
@@ -113,25 +122,34 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 45
+        marginTop: 45,
+        borderColor: 'grey',
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        padding: 20
+
+
     },
     titleForm: {
-        marginBottom: 20,
+        marginBottom: 40,
         fontSize: 20,
         fontWeight: 'bold',
         marginTop: -10
     },
     input: {
-        marginBottom: 30
+        height: 40,
+        marginTop: 5,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10
     },
     button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
+        paddingVertical: 8,
+        paddingHorizontal: 14,
+        borderRadius: 30,
         backgroundColor: '#66609F',
+        margin: '5px',
     },
     text: {
         fontSize: 16,
@@ -140,6 +158,9 @@ const styles = StyleSheet.create({
         letterSpacing: 0.25,
         color: 'white',
     },
+    formItem: {
+        marginBottom: 20
+    }
 });
 
 

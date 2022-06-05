@@ -69,7 +69,6 @@ const LoginScreen = ({ navigation }: Props) => {
                         underlineColorAndroid="white"
                         style={loginStyles.inputFIeld}
                         selectionColor="white"
-                        keyboardType='number-pad'
 
                         onChangeText={(value) => onChange(value, "dni")}
                         value={dni}

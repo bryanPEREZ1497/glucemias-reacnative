@@ -20,10 +20,11 @@ export const MenuLateralBasico = () => {
 
       screenOptions={{
         headerShown: true,
-        drawerStyle:{backgroundColor:'#66609F'},
+        drawerStyle: { backgroundColor: '#66609F' },
         headerStyle: {
           elevation: 0,
           backgroundColor: '#514a97',
+
         },
 
       }}

@@ -2,9 +2,8 @@ import React, { useContext, useEffect, useState } from 'react'
 
 import { View, Text, ScrollView, StyleSheet, Button, TextInput, Pressable } from 'react-native';
 import { PaperContext } from '../../context/PaperContext';
-// import TextInput from 'react-native-text-input-interactive';
 import { useFecha } from '../../hooks/useFecha';
-// import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 const PapersScreen5 = () => {
 
@@ -38,28 +37,18 @@ const PapersScreen5 = () => {
 
         <ScrollView style={{ flex: 1 }}>
 
+            <View style={{ marginTop: 20, position: 'relative' }}>
+                <Icon style={{ position: 'absolute' }} name={'calendar'} size={20}></Icon>
+                <Text style={{ fontSize: 15, marginLeft: 26 }}>{paper.dia}</Text>
+            </View>
             <View style={styles.formContainer}>
-                {/* {pendingPapers
-                    && pendingPapers.map((paper) => (
-                        (
-                            <View>
-                                {paper.ayunas}
-                            </View>
-                        )
-                    ))} */}
-
-                <View style={{ right: 40, bottom: 16 }}>
-                    <Text style={{ fontSize: 15 }}>      {paper.dia}</Text>
-                </View>
-                <View style={{ right: 160, bottom: 37 }}>
-                    {/* <MaterialIcons name='today' size={23} color='#6F68A6' /> */}
-                </View>
 
                 <Text style={styles.titleForm}>Glucemia Dormir</Text>
-                <View style={styles.input}>
-                    <Text>dormir</Text>
+                <View style={styles.formItem}>
+
                     <TextInput
                         editable={!isDisabled}
+                        style={styles.input}
                         selectTextOnFocus={!isDisabled}
                         placeholder='Nivel de Glucosa'
                         value={paper.dormir}
@@ -67,12 +56,12 @@ const PapersScreen5 = () => {
                         onChangeText={(value) => handleChange(value, "dormir")} />
                 </View>
 
-                <Button
-                    onPress={savePaper}
-                    title="Guardar mi registros :D"
-                    color="#841584"
-                    disabled={isDisabled}
-                />
+
+                <Pressable disabled={isDisabled}
+                    style={styles.button}
+                    onPress={savePaper}>
+                        <Icon style={{ color: 'white', fontSize: 34 }} name={'save'} size={20}></Icon>
+                </Pressable>
             </View>
 
         </ScrollView>
@@ -83,24 +72,35 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 45
+        marginTop: 45,
+        borderColor: 'grey',
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        paddingVertical: 40,
+        paddingHorizontal: 40,
+
+
     },
     titleForm: {
-        marginBottom: 20,
+        marginBottom: 40,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: -10
     },
     input: {
-        marginBottom: 30
+        height: 40,
+        marginTop: 5,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10
     },
     button: {
-        alignItems: 'center',
-        justifyContent: 'center',
-        paddingVertical: 12,
-        paddingHorizontal: 32,
-        borderRadius: 4,
-        elevation: 3,
+        paddingVertical: 14,
+        paddingHorizontal: 16,
+        borderRadius: 35,
         backgroundColor: '#66609F',
+        margin: '5px',
     },
     text: {
         fontSize: 16,
@@ -108,6 +108,9 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         letterSpacing: 0.25,
         color: 'white',
+    },
+    formItem: {
+        marginBottom: 20
     },
 });
 

@@ -51,10 +51,13 @@ const FormScreen = () => {
                     <Icon style={{ position: 'absolute' }} name={'calendar'} size={20}></Icon>
                     <Text style={{ fontSize: 15, marginLeft: 26 }}>{paper.dia}</Text>
                 </View>
+
                 <View style={styles.formContainer}>
 
                     <Text style={styles.titleForm}>Glucemia en Ayunas</Text>
+                    
                     <View style={styles.formItem}>
+
                         <Text>Ayunas</Text>
                         <TextInput
                             editable={!isDisabled}
@@ -94,21 +97,16 @@ const FormScreen = () => {
                     <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
                         <Text style={{ paddingHorizontal: '5px' }}>Corrección</Text>
                         <Text style={{ paddingHorizontal: '5px', marginEnd: '5px' }}>{correccion}</Text>
-                        {/* <Button disabled={isDisabled}
-                            onPress={() => handlePress(1)}
-                            title="+"
-                            color="#841584"
-                        />
-                        <Button disabled={isDisabled}
-                            onPress={() => handlePress(-1)}
-                            title="-"
-                            color="#841584"
-                        /> */}
-                        <Pressable style={styles.button} onPress={() => handlePress(+1)}>
-                            <Text style={{color:'white',fontSize:14}}>+</Text>
+
+                        <Pressable disabled={isDisabled}
+                            style={styles.button}
+                            onPress={() => handlePress(+1)}>
+                            <Text style={{ color: 'white', fontSize: 14 }}>+</Text>
                         </Pressable>
-                        <Pressable style={styles.button} onPress={() => handlePress(-1)}>
-                            <Text style={{color:'white',fontSize:14}}>-</Text>
+                        <Pressable disabled={isDisabled}
+                            style={styles.button}
+                            onPress={() => handlePress(-1)}>
+                            <Text style={{ color: 'white', fontSize: 14 }}>-</Text>
                         </Pressable>
                     </View>
                 </View>
@@ -127,7 +125,8 @@ const styles = StyleSheet.create({
         borderRadius: 3,
         borderStyle: 'solid',
         borderWidth: 1,
-        padding: 20
+        paddingVertical: 40,
+        paddingHorizontal: 40,
 
 
     },

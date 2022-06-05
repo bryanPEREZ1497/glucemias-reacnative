@@ -1,11 +1,13 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, Pressable } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler';
 // import TextInput from 'react-native-text-input-interactive';
 import { StyleSheet } from 'react-native';
 // import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { useFecha } from '../../hooks/useFecha';
 import { PaperContext } from '../../context/PaperContext';
+import Icon from 'react-native-vector-icons/Ionicons';
+
 
 export const PapersScreen3 = () => {
 
@@ -40,59 +42,59 @@ export const PapersScreen3 = () => {
     }
 
 
-    // useEffect(() => {
-    //     setPaper({
-    //         ...paper,
-    //         correcion_total: totalCorreciones.toString()
-    //     });
-    // }, [totalCorreciones])
+
     return (
         <ScrollView style={{ flex: 1 }}>
-
+            
+            <View style={{ marginTop: 20, position: 'relative' }}>
+                <Icon style={{ position: 'absolute' }} name={'calendar'} size={20}></Icon>
+                <Text style={{ fontSize: 15, marginLeft: 26 }}>{paper.dia}</Text>
+            </View>
             <View style={styles.formContainer}>
-                <View style={{ right: 40, bottom: 16 }}>
-                    <Text style={{ fontSize: 15 }}>      {paper.dia}</Text>
-                </View>
-                <View style={{ right: 160, bottom: 37 }}>
-                    {/* <MaterialIcons name='today' size={23} color='#6F68A6' /> */}
-                </View>
+
+
+
                 <Text style={styles.titleForm}>Glucemia a la Media Tarde</Text>
-                <View style={styles.input}>
-                    <Text>media_tarde</Text>
+                <View style={styles.formItem}>
+
+                    <Text>Media Tarde</Text>
                     <TextInput
                         editable={!isDisabled}
                         selectTextOnFocus={!isDisabled}
                         placeholder='Nivel de Glucosa'
                         value={paper.media_tarde}
+                        style={styles.input}
                         keyboardType='number-pad'
                         onChangeText={(value) => handleChange(value, "media_tarde")} />
                 </View>
 
-                <View style={styles.input}>
-                    <Text>rapida_ultra_rap_t</Text>
+                <View style={styles.formItem}>
+
+                    <Text>Rápida/Ultra rápida</Text>
                     <TextInput
                         editable={!isDisabled}
                         selectTextOnFocus={!isDisabled}
                         placeholder='Insulina Rápida'
                         value={paper.rapida_ultra_rap_t}
+                        style={styles.input}
                         keyboardType='number-pad'
                         onChangeText={(value) => handleChange(value, "rapida_ultra_rap_t")} />
                 </View>
 
-                <View>
-                    {correccion}
-                    <Button
-                        disabled={isDisabled}
-                        onPress={() => handlePress(1)}
-                        title="+"
-                        color="#841584"
-                    />
-                    <Button
-                        disabled={isDisabled}
-                        onPress={() => handlePress(-1)}
-                        title="-"
-                        color="#841584"
-                    />
+                <View style={{ flex: 1, flexDirection: 'row', flexWrap: 'wrap' }}>
+                    <Text style={{ paddingHorizontal: '5px' }}>Corrección</Text>
+                    <Text style={{ paddingHorizontal: '5px', marginEnd: '5px' }}>{correccion}</Text>
+
+                    <Pressable disabled={isDisabled}
+                        style={styles.button}
+                        onPress={() => handlePress(+1)}>
+                        <Text style={{ color: 'white', fontSize: 14 }}>+</Text>
+                    </Pressable>
+                    <Pressable disabled={isDisabled}
+                        style={styles.button}
+                        onPress={() => handlePress(-1)}>
+                        <Text style={{ color: 'white', fontSize: 14 }}>-</Text>
+                    </Pressable>
                 </View>
             </View>
         </ScrollView>
@@ -103,17 +105,48 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop: 45
+        marginTop: 45,
+        borderColor: 'grey',
+        borderRadius: 3,
+        borderStyle: 'solid',
+        borderWidth: 1,
+        paddingVertical: 40,
+        paddingHorizontal: 40,
+
+
     },
     titleForm: {
-        marginBottom: 20,
+        marginBottom: 40,
         fontSize: 20,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        marginTop: -10
     },
     input: {
-        marginBottom: 30
+        height: 40,
+        marginTop: 5,
+        borderWidth: 1,
+        padding: 10,
+        borderRadius: 10
+    },
+    button: {
+        paddingVertical: 8,
+        paddingHorizontal: 14,
+        borderRadius: 30,
+        backgroundColor: '#66609F',
+        margin: '5px',
+    },
+    text: {
+        fontSize: 16,
+        lineHeight: 21,
+        fontWeight: 'bold',
+        letterSpacing: 0.25,
+        color: 'white',
+    },
+    formItem: {
+        marginBottom: 20
     }
 });
+
 
 
 export default PapersScreen3

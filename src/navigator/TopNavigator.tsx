@@ -90,8 +90,8 @@ export const TopNavigator = ({ navigation }: Props) => {
       sceneContainerStyle={{
         backgroundColor: 'white',
         display: 'flex',
-          alignContent: 'center',
-          flexWrap: 'wrap'
+        alignContent: 'center',
+        flexWrap: 'wrap'
       }}
 
 
